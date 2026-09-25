@@ -32,4 +32,11 @@ describe("computeTotals", () => {
     const t = computeTotals(cart({ lines: [{ sku: "NW-DESK-LAMP", quantity: 1 }] }));
     expect(t.shippingCents).toBe(0);
   });
+
+  it("uses zone pricing for express delivery", () => {
+    expect(computeTotals(cart({ shippingMethod: "express" })).shippingCents).toBe(1200);
+    expect(computeTotals(cart({ shippingMethod: "express", region: "TX" })).shippingCents).toBe(
+      1900,
+    );
+  });
 });
