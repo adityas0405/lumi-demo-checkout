@@ -1,10 +1,8 @@
+import { format } from "date-fns";
 import type { Totals } from "../checkout/totals";
 import { formatCents } from "../money";
 
 export function OrderConfirmation({ totals, placedAt }: { totals: Totals; placedAt: Date }) {
-  const date = `${placedAt.getFullYear()}-${String(placedAt.getMonth() + 1).padStart(2, "0")}-${String(
-    placedAt.getDate(),
-  ).padStart(2, "0")}`;
   return (
     <div className="page confirm">
       <div className="panel">
@@ -12,7 +10,7 @@ export function OrderConfirmation({ totals, placedAt }: { totals: Totals; placed
           ✓
         </div>
         <h1>Order placed</h1>
-        <p className="muted">Placed on {date}</p>
+        <p className="muted">Placed on {format(placedAt, "MMMM d, yyyy 'at' h:mm a")}</p>
         <p className="big">{formatCents(totals.totalCents)}</p>
         <p className="muted">A receipt is on its way to your inbox.</p>
       </div>
