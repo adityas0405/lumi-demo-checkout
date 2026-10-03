@@ -18,7 +18,7 @@ export function computeTotals(cart: Cart): Totals {
   const subtotalCents = subtotal(cart);
   const discountCents = discountFor(cart.coupon, subtotalCents);
   const taxable = subtotalCents - discountCents;
-  const shippingCents = shippingFor(cart.shippingMethod, taxable, totalWeight(cart));
+  const shippingCents = shippingFor(cart.shippingMethod, taxable, totalWeight(cart), cart.region);
   const taxCents = taxFor(taxable, cart.region);
   return {
     subtotalCents,
